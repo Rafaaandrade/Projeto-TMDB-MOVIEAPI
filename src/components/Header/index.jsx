@@ -72,6 +72,8 @@ const Header = ({ methods, api_url, setFilme }) => {
             <IconButton type='submit' control={control}>
               <SearchIcon className={styles.icnPesquisa} />
             </IconButton>
+            <br />
+            {errors.pesquisa?.message}
           </form>
         </FormProvider>
 
