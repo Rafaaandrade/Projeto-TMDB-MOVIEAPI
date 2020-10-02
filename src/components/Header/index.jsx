@@ -14,7 +14,7 @@ import AddIcon from '@material-ui/icons/Add';
 import axios from 'axios';
 import { Controller, FormProvider } from 'react-hook-form';
 
-const Header = ({ methods, api_url }) => {
+const Header = ({ methods, api_url, setFilme }) => {
   const styles = useStyles();
   const { control, handleSubmit, errors } = methods;
 
@@ -40,6 +40,9 @@ const Header = ({ methods, api_url }) => {
       .get(api)
       .then((response) => {
         console.log(response);
+        const resultado = response.data.results;
+        setFilme(resultado);
+        console.log('resultado', resultado);
       })
       .catch((error) => {
         console.warn(error);

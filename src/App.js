@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from './components/Header/index';
 import CardFilmes from './components/Cards/index';
 import { useForm } from 'react-hook-form';
@@ -10,11 +10,13 @@ function App() {
     'https://api.themoviedb.org/3/search/movie?api_key=' +
     api_key +
     '&language=pt-BR&query=';
+  const [filme, setFilme] = useState([]);
+
   return (
     <div className='App'>
-      <Header methods={methods} api_url={api_url} />
+      <Header methods={methods} api_url={api_url} setFilme={setFilme} />
 
-      <CardFilmes />
+      <CardFilmes filme={filme} />
     </div>
   );
 }
