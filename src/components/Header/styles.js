@@ -19,6 +19,12 @@ export const useStyles = makeStyles(() => ({
   btnCadastre: {
     color: 'white',
   },
+  divPesquisa: {
+    width: '75%',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
 }));
 
 export default useStyles;

@@ -18,7 +18,6 @@ const CardFilmes = ({ filme }) => {
 
   const resto = filme && filme.length % 3;
 
-  console.log(filme);
   return (
     <Box
       display='flex'
@@ -56,7 +55,7 @@ const CardFilmes = ({ filme }) => {
           </Box>
         ))}
       {Array.apply(null, { length: 3 - resto }).map((r) => (
-        <Box width='30%' height='1000px'></Box>
+        <Box width='30%' height='100px'></Box>
       ))}
     </Box>
   );

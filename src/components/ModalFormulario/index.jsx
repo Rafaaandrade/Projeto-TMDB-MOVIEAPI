@@ -1,20 +1,21 @@
+import React from 'react';
+import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import React, { useState } from 'react';
 import { Controller, FormProvider } from 'react-hook-form';
 import useStyles from './styles';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
 
-const OnSubmit = (data) => {
-  console.log(data);
-};
-
-const Formulario = ({ cadastrar, methods, clear }) => {
+const ModalFormulario = ({ cadastrar, methods, clear, show }) => {
   const styles = useStyles();
   const { control, handleSubmit, errors } = methods;
 
-  return (
+  const OnSubmit = (data) => {
+    console.log('dados_formulario', data);
+  };
+
+  const body = (
     <Paper className={styles.boxFormulario}>
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(OnSubmit)}>
@@ -79,6 +80,10 @@ const Formulario = ({ cadastrar, methods, clear }) => {
       </FormProvider>
     </Paper>
   );
+  return (
+    <div className={styles.modal}>
+      <Modal open={show}>{body}</Modal>
+    </div>
+  );
 };
-
-export default Formulario;
+export default ModalFormulario;
