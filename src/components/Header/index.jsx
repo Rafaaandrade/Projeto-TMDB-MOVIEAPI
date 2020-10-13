@@ -8,7 +8,7 @@ import {
 } from '@material-ui/core';
 import Input from '@material-ui/core/Input';
 import SearchIcon from '@material-ui/icons/Search';
-import React, { useState } from 'react';
+import React from 'react';
 import useStyles from './styles';
 import AddIcon from '@material-ui/icons/Add';
 import axios from 'axios';

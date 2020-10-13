@@ -1,6 +1,6 @@
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import React, { useState } from 'react';
+import React from 'react';
 import { Controller, FormProvider } from 'react-hook-form';
 import useStyles from './styles';
 import TextField from '@material-ui/core/TextField';

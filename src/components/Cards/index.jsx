@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import useStyles from './styles';
 
-const CardFilmes = ({ filme }) => {
+const CardFilmes = ({ filme, setSaibaMais, setShow }) => {
   const styles = useStyles();
 
   const img = '';
@@ -17,6 +17,19 @@ const CardFilmes = ({ filme }) => {
     `https://image.tmdb.org/t/p/w${width}_and_h${height}_bestv2${img}`;
 
   const resto = filme && filme.length % 3;
+  // const saibaMaisClick = (f) => {
+  //   const clickSaibaMais = {
+  //     showModal: true,
+  //     ...f,
+  //   };
+  //   setSaibaMais(clickSaibaMais);
+  //   console.log(saibaMais);
+  // };
+
+  const clickSaibaMais = (data) => {
+    setSaibaMais(data);
+    setShow(true);
+  };
 
   return (
     <Box
@@ -44,7 +57,11 @@ const CardFilmes = ({ filme }) => {
                 {f.overview}
               </CardContent>
               <CardActions>
-                <Button size='small' color='primary'>
+                <Button
+                  onClick={() => clickSaibaMais(f)}
+                  size='small'
+                  color='primary'
+                >
                   Saiba Mais
                 </Button>
                 <Button size='small' color='primary'>

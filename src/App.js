@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers';
 import ModalFormulario from './components/ModalFormulario/index';
+import ModalDetalharFilme from './components/ModalDetalharFilme/index';
 
 function App() {
   const schema = yup.object().shape({
@@ -15,7 +16,7 @@ function App() {
       .max(40, 'O máximo de 30 carácteres foi excedido.'),
     email: yup
       .string()
-      .required('O campo E-mail deve ser preenchido')
+      .required('O campo E-MAIL deve ser preenchido')
       .max(60, 'O máximo de 30 carácteres foi excedido.'),
     senha: yup
       .string()
@@ -26,7 +27,7 @@ function App() {
   const [filme, setFilme] = useState([]);
   const [cadastrar, setCadastrar] = useState(false);
   const [show, setShow] = useState(false);
-
+  const [saibaMais, setSaibaMais] = useState([]);
   const clear = () => {
     methods.setValue('usuario', '');
     methods.setValue('email', '');
@@ -38,6 +39,8 @@ function App() {
     api_key +
     '&language=pt-BR&query=';
 
+  console.log('Informações - saibaMais', saibaMais);
+  console.log('Mostrar modal saibaMais', show);
   return (
     <div className='App'>
       <Header
@@ -49,13 +52,17 @@ function App() {
         setShow={setShow}
         show={show}
       />
-      <CardFilmes filme={filme} />
-      <ModalFormulario
-        cadastrar={cadastrar}
-        clear={clear}
-        methods={methods}
-        show={show}
-      />
+
+      <ModalDetalharFilme saibaMais={saibaMais} />
+      <CardFilmes
+        filme={filme}
+        setSaibaMais={setSaibaMais}
+        setShow={setShow}
+      ></CardFilmes>
+
+      <ModalFormulario show={show} methods={methods} setShow={setShow}>
+        <Formulario cadastrar={cadastrar} clear={clear} />
+      </ModalFormulario>
     </div>
   );
 }
