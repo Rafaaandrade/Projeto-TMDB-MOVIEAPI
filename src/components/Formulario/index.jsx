@@ -5,15 +5,24 @@ import { Controller, FormProvider } from 'react-hook-form';
 import useStyles from './styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { schemaForms } from './../../utils/yup/schema';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers';
 
 const OnSubmit = (data) => {
   console.log(data);
 };
 
-const Formulario = ({ cadastrar, methods, clear }) => {
+const Formulario = ({ cadastrar }) => {
   const styles = useStyles();
+  const methods = useForm({ resolver: yupResolver(schemaForms) });
   const { control, handleSubmit, errors } = methods;
 
+  const clear = () => {
+    methods.setValue('usuario', '');
+    methods.setValue('email', '');
+    methods.setValue('senha', '');
+  };
   return (
     <Paper className={styles.boxFormulario}>
       <FormProvider {...methods}>

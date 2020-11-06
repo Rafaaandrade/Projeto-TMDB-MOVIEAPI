@@ -1,6 +1,7 @@
 import Modal from '@material-ui/core/Modal';
 import React from 'react';
 import Formulario from '../Formulario/index';
+
 const ModalFormulario = ({ show, setShow, methods }) => {
   const handleClose = () => {
     setShow(false);

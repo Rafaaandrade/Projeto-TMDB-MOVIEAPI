@@ -25,6 +25,10 @@ export const useStyles = makeStyles(() => ({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  divLoginHeader: {
+    width: '30%',
+    align: 'right',
+  },
 }));
 
 export default useStyles;

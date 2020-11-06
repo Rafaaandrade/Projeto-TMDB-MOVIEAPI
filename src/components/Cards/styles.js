@@ -6,7 +6,22 @@ export const useStyles = makeStyles(() => ({
     width: '300px',
   },
   cards: {
-    height: '900px',
+    display: 'flex-end',
+    justifyContent: 'space-between',
+    width: '30%',
+    height: '1000px',
+  },
+  cardsContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    marginTop: '20px',
+    width: '100%',
+  },
+  blankCard: {
+    width: '30%',
+    height: '100px',
   },
 }));
 

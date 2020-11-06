@@ -1,6 +1,5 @@
 import {
   IconButton,
-  Box,
   AppBar,
   Toolbar,
   Typography,
@@ -14,43 +13,18 @@ import AddIcon from '@material-ui/icons/Add';
 import axios from 'axios';
 import { Controller, FormProvider } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers';
+import { buildQueryParams } from './../../utils/functions/function-utils';
+import { schemaHeader } from './../../utils/yup/schema';
+import API from './../../utils/api/api';
 
-const Header = ({
-  api_url,
-  setFilme,
-  setCadastrar,
-  cadastrar,
-  setShow,
-  show,
-}) => {
+const Header = ({ setFilme, setCadastrar, cadastrar, setShow, show }) => {
   const styles = useStyles();
-
-  const schema = yup.object().shape({
-    pesquisa: yup.string().max(30, 'Máximo de 30 carácteres'),
-  });
-
-  const methods = useForm({ resolver: yupResolver(schema) });
+  const methods = useForm({ resolver: yupResolver(schemaHeader) });
   const { control, handleSubmit, errors } = methods;
 
-  const isNotEmpty = (object) => {
-    return object !== '' && object !== undefined && object !== null;
-  };
-
-  const buildQueryParams = (api_url) => {
-    const cleanQueryJson = Object.entries(api_url).reduce(
-      (a, [k, v]) => (isNotEmpty(v) ? ((a[k] = v), a) : a),
-      {}
-    );
-    return Object.entries(cleanQueryJson)
-      .map((pair) => pair.map(encodeURIComponent).join('='))
-      .join('&');
-  };
-
   const handlePesquisaFilme = (data) => {
-    // console.log(data);
-    const api = api_url + data.pesquisa;
+    const api = API.URL + data.pesquisa;
     buildQueryParams(api);
     axios
       .get(api)
@@ -106,7 +80,7 @@ const Header = ({
             </form>
           </FormProvider>
         </div>
-        <Box width='30%' align='right'>
+        <div className={styles.divLoginHeader}>
           {cadastrar ? (
             ''
           ) : (
@@ -125,7 +99,7 @@ const Header = ({
           >
             Cadastre-se
           </Button>
-        </Box>
+        </div>
       </Toolbar>
     </AppBar>
   );
