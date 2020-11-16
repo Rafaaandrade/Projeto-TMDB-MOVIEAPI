@@ -5,6 +5,7 @@ import Header from './components/Header/index';
 import DetalharFilme from './components/ModalDetalharFilme/index';
 import ModalDetalharFilme from './components/ModalDetalharFilme/Modal/index';
 import ModalFormulario from './components/ModalFormulario/index';
+import PesquisaEModalContext from './components/Context/context';
 
 function App() {
   // const [filme, setFilme] = useState([]);
@@ -17,30 +18,18 @@ function App() {
   // console.log('Mostrar modal saibaMais', showModal);
   return (
     <div className='App'>
-      <Header
-        setFilme={setFilme}
-        setCadastrar={setCadastrar}
-        cadastrar={cadastrar}
-        setShow={setShow}
-        show={show}
-      />
+      <PesquisaEModalContext>
+        <Header />
+        <CardFilmes>
+          <DetalharFilme>
+            <ModalDetalharFilme />
+          </DetalharFilme>
+        </CardFilmes>
 
-      <CardFilmes
-        filme={filme}
-        setSaibaMais={setSaibaMais}
-        setShowModal={setShowModal}
-      >
-        <DetalharFilme saibaMais={saibaMais} showModal={showModal}>
-          <ModalDetalharFilme
-            showModal={showModal}
-            setShowModal={setShowModal}
-          />
-        </DetalharFilme>
-      </CardFilmes>
-
-      <ModalFormulario show={show} setShow={setShow}>
-        <Formulario cadastrar={cadastrar} />
-      </ModalFormulario>
+        <ModalFormulario>
+          <Formulario />
+        </ModalFormulario>
+      </PesquisaEModalContext>
     </div>
   );
 }

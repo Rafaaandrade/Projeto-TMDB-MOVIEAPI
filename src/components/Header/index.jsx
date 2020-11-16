@@ -1,54 +1,58 @@
+import { yupResolver } from '@hookform/resolvers';
 import {
-  IconButton,
   AppBar,
+  Button,
+  IconButton,
   Toolbar,
   Typography,
-  Button,
 } from '@material-ui/core';
 import Input from '@material-ui/core/Input';
-import SearchIcon from '@material-ui/icons/Search';
-import React from 'react';
-import useStyles from './styles';
 import AddIcon from '@material-ui/icons/Add';
-import axios from 'axios';
-import { Controller, FormProvider } from 'react-hook-form';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers';
-import { buildQueryParams } from './../../utils/functions/function-utils';
+import SearchIcon from '@material-ui/icons/Search';
+import React, { useContext } from 'react';
+import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { schemaHeader } from './../../utils/yup/schema';
-import API from './../../utils/api/api';
+import useStyles from './styles';
+import { useMyContext } from './../Context/context';
 
-const Header = ({ setFilme, setCadastrar, cadastrar, setShow, show }) => {
+const Header = () => {
   const styles = useStyles();
   const methods = useForm({ resolver: yupResolver(schemaHeader) });
   const { control, handleSubmit, errors } = methods;
+  const [state, setState] = useContext(myContext);
 
-  const handlePesquisaFilme = (data) => {
-    const api = API.URL + data.pesquisa;
-    buildQueryParams(api);
-    axios
-      .get(api)
-      .then((response) => {
-        const resultado = response.data.results;
-        setFilme(resultado);
-      })
-      .catch((error) => {
-        console.warn(error);
-      });
-  };
+  // const handlePesquisaFilme = (data) => {
+  //   const api = API.URL + data.pesquisa;
+  //   buildQueryParams(api);
+  //   axios
+  //     .get(api)
+  //     .then((response) => {
+  //       const resultado = response.data.results;
+  //       setFilme(resultado);
+  //     })
+  //     .catch((error) => {
+  //       console.warn(error);
+  //     });
+  // };
 
   const handleCadastre = () => {
-    setCadastrar(true);
-    setShow(true);
-    console.log('abrir modal', show);
-    console.log('cadastrol', cadastrar);
+    setState((state) => ({ ...state, showModalLogin: true, isCadastro: true }));
+    // setCadastrar(true);
+    // setShow(true);
+    // console.log('abrir modal', show);
+    // console.log('cadastrol', cadastrar);
   };
 
   const handleEntrar = () => {
-    setCadastrar(false);
-    setShow(true);
-    console.log('cadastro', cadastrar);
-    console.log('abrir modal', show);
+    setState((state) => ({
+      ...state,
+      showModalLogin: true,
+      isCadastro: false,
+    }));
+    // setCadastrar(false);
+    // setShow(true);
+    // console.log('cadastro', cadastrar);
+    // console.log('abrir modal', show);
   };
 
   return (
