@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CardFilmes from './components/Cards/index';
 import Formulario from './components/Formulario/index';
 import Header from './components/Header/index';
 import DetalharFilme from './components/ModalDetalharFilme/index';
 import ModalDetalharFilme from './components/ModalDetalharFilme/Modal/index';
 import ModalFormulario from './components/ModalFormulario/index';
-import PesquisaEModalContext from './components/Context/context';
+import PesquisaModalContext from './components/Context/context';
 
 function App() {
   // const [filme, setFilme] = useState([]);
@@ -18,7 +18,7 @@ function App() {
   // console.log('Mostrar modal saibaMais', showModal);
   return (
     <div className='App'>
-      <PesquisaEModalContext>
+      <PesquisaModalContext>
         <Header />
         <CardFilmes>
           <DetalharFilme>
@@ -29,7 +29,7 @@ function App() {
         <ModalFormulario>
           <Formulario />
         </ModalFormulario>
-      </PesquisaEModalContext>
+      </PesquisaModalContext>
     </div>
   );
 }

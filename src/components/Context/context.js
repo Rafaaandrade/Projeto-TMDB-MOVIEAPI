@@ -4,17 +4,18 @@ import axios from 'axios';
 import { buildQueryParams } from './../../utils/functions/function-utils';
 
 const myContext = createContext();
-const initialState = [
-  {
-    filmes: [],
-    selected: null,
-    showModalLogin: false,
-    showModalDetalhes: false,
-    isCadastro: false,
-  },
-];
+// const initialState = [
+//   {
+//     filmes: [],
+//     selected: null,
+//     showModalLogin: false,
+//     showModalDetalhes: false,
+//     isCadastro: false,
+//   },
+// ];
+const initialState = [];
 
-export default function PesquisaEModalContext({ children }) {
+export default function PesquisaModalContext({ children }) {
   const [context, setContext] = useState(initialState);
 
   const handlePesquisaFilme = (data) => {
@@ -24,21 +25,65 @@ export default function PesquisaEModalContext({ children }) {
       .get(api)
       .then((response) => {
         const resultado = response.data.results;
-        setContext(...context, filmes[resultado]);
+        setContext((prevState) => ({ ...prevState, filmes: resultado }));
+
+        console.log(context);
       })
       .catch((error) => {
         console.warn(error);
       });
   };
 
+  const closeModal = () => {
+    setContext((prevState) => ({ ...prevState, showModal: false }));
+  };
+
+  const openModal = () => {
+    setContext((prevState) => ({ ...prevState, showModal: true }));
+  };
+
+  const openModalDetails = () => {
+    setContext((prevState) => ({ ...prevState, showDetailsModal: true }));
+  };
+
+  const detalharFilme = (data) => {
+    setContext((prevState) => ({
+      ...prevState,
+      saibaMais: data,
+    }));
+  };
+
   return (
-    <PesquisaEModalContext.Provider value={(handlePesquisaFilme, context)}>
+    <myContext.Provider
+      value={{
+        handlePesquisaFilme,
+        context,
+        closeModal,
+        openModal,
+        detalharFilme,
+        openModalDetails,
+      }}
+    >
       {children}
-    </PesquisaEModalContext.Provider>
+    </myContext.Provider>
   );
 }
 
 export function useMyContext() {
-  const { handlePesquisaFilme, context } = useContext(myContext);
-  return { handlePesquisaFilme, context };
+  const {
+    handlePesquisaFilme,
+    context,
+    closeModal,
+    openModal,
+    detalharFilme,
+    openModalDetails,
+  } = useContext(myContext);
+  return {
+    handlePesquisaFilme,
+    context,
+    closeModal,
+    openModal,
+    detalharFilme,
+    openModalDetails,
+  };
 }

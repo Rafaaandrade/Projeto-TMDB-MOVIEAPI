@@ -7,21 +7,24 @@ import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import useStyles from './styles';
 import { concatenar } from './../../utils/functions/function-utils';
+import { useMyContext } from './../Context/context';
 
-const CardFilmes = ({ filme, setSaibaMais, setShowModal }) => {
+const CardFilmes = () => {
   const styles = useStyles();
+  const { context, detalharFilme, openModalDetails } = useMyContext();
 
-  const resto = filme && filme.length % 3;
+  // const resto = filme && filme.length % 3;
 
   const clickSaibaMais = (data) => {
-    setSaibaMais(data);
-    setShowModal(true);
+    detalharFilme(data);
+    openModalDetails();
+    // setShowModal(true);
   };
 
   return (
     <div className={styles.cardsContainer}>
-      {filme &&
-        filme.map((f) => (
+      {context.filmes &&
+        context.filmes.map((f) => (
           <div className={styles.cards}>
             <Card key={f.id}>
               <CardMedia component='img' image={concatenar(f.poster_path)} />
@@ -46,9 +49,9 @@ const CardFilmes = ({ filme, setSaibaMais, setShowModal }) => {
             </Card>
           </div>
         ))}
-      {Array.apply(null, { length: 3 - resto }).map((r) => (
+      {/* {Array.apply(null, { length: 3 - resto }).map((r) => (
         <div className={styles.blankCard}></div>
-      ))}
+      ))} */}
     </div>
   );
 };

@@ -1,16 +1,15 @@
 import Modal from '@material-ui/core/Modal';
 import React from 'react';
 import Formulario from '../Formulario/index';
+import { useMyContext } from './../Context/context';
 
-const ModalFormulario = ({ show, setShow, methods }) => {
-  const handleClose = () => {
-    setShow(false);
-  };
+const ModalFormulario = () => {
+  const { openModal, closeModal, context } = useMyContext();
 
   return (
     <div>
-      <Modal open={show} onClose={handleClose}>
-        <Formulario methods={methods} />
+      <Modal open={context.showModal ? openModal : ''} onClose={closeModal}>
+        <Formulario />
       </Modal>
     </div>
   );

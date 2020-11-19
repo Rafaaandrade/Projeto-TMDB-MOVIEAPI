@@ -2,9 +2,11 @@ import React from 'react';
 import useStyles from './styles';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import { useMyContext } from './../Context/context';
 
-const DetalharFilme = ({ saibaMais, showModal }) => {
+const DetalharFilme = () => {
   const styles = useStyles();
+  const { context } = useMyContext();
 
   return (
     <Paper className={styles.modalFormulario}>
@@ -12,16 +14,16 @@ const DetalharFilme = ({ saibaMais, showModal }) => {
         Detalhes do filme:
       </Typography>
       <Typography variant='body1'>
-        Populariedade {saibaMais.popularity}
+        Populariedade {context.saibaMais.popularity}
       </Typography>
       <Typography variant='body1'>
-        Data de lançamento {saibaMais.release_date}
+        Data de lançamento {context.saibaMais.release_date}
       </Typography>
       <Typography variant='body1'>
-        Média de votos {saibaMais.vote_average}
+        Média de votos {context.saibaMais.vote_average}
       </Typography>
       <Typography variant='body1'>
-        Quantidade de votos {saibaMais.vote_count}
+        Quantidade de votos {context.saibaMais.vote_count}
       </Typography>
     </Paper>
   );

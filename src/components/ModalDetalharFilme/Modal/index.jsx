@@ -1,14 +1,16 @@
 import React from 'react';
 import Modal from '@material-ui/core/Modal';
 import DetalharFilme from './index';
+import { useMyContext } from './../../Context/context';
 
-const ModalDetalharFilme = ({ showModal, setShowModal }) => {
-  const handleClose = () => {
-    setShowModal(false);
-  };
+const ModalDetalharFilme = () => {
+  const { context, closeModal, openModalDetails } = useMyContext();
 
   return (
-    <Modal open={showModal} onClose={handleClose}>
+    <Modal
+      open={context.showDetailsModal ? openModalDetails : ''}
+      onClose={closeModal}
+    >
       <DetalharFilme />
     </Modal>
   );

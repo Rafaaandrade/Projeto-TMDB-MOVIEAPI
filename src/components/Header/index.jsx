@@ -9,7 +9,7 @@ import {
 import Input from '@material-ui/core/Input';
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
-import React, { useContext } from 'react';
+import React from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { schemaHeader } from './../../utils/yup/schema';
 import useStyles from './styles';
@@ -19,24 +19,15 @@ const Header = () => {
   const styles = useStyles();
   const methods = useForm({ resolver: yupResolver(schemaHeader) });
   const { control, handleSubmit, errors } = methods;
-  const [state, setState] = useContext(myContext);
-
-  // const handlePesquisaFilme = (data) => {
-  //   const api = API.URL + data.pesquisa;
-  //   buildQueryParams(api);
-  //   axios
-  //     .get(api)
-  //     .then((response) => {
-  //       const resultado = response.data.results;
-  //       setFilme(resultado);
-  //     })
-  //     .catch((error) => {
-  //       console.warn(error);
-  //     });
-  // };
+  const {
+    handlePesquisaFilme,
+    openModal,
+    closeModal,
+    context,
+  } = useMyContext();
 
   const handleCadastre = () => {
-    setState((state) => ({ ...state, showModalLogin: true, isCadastro: true }));
+    openModal();
     // setCadastrar(true);
     // setShow(true);
     // console.log('abrir modal', show);
@@ -44,17 +35,14 @@ const Header = () => {
   };
 
   const handleEntrar = () => {
-    setState((state) => ({
-      ...state,
-      showModalLogin: true,
-      isCadastro: false,
-    }));
+    openModal();
     // setCadastrar(false);
     // setShow(true);
     // console.log('cadastro', cadastrar);
     // console.log('abrir modal', show);
   };
 
+  console.log('context', context);
   return (
     <AppBar position='static'>
       <Toolbar>
@@ -85,7 +73,7 @@ const Header = () => {
           </FormProvider>
         </div>
         <div className={styles.divLoginHeader}>
-          {cadastrar ? (
+          {context.isCadastro ? (
             ''
           ) : (
             <IconButton>
