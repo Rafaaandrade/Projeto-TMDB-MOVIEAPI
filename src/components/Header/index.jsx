@@ -19,30 +19,17 @@ const Header = () => {
   const styles = useStyles();
   const methods = useForm({ resolver: yupResolver(schemaHeader) });
   const { control, handleSubmit, errors } = methods;
-  const {
-    handlePesquisaFilme,
-    openModal,
-    closeModal,
-    context,
-  } = useMyContext();
+  const { handlePesquisaFilme, context, modalRef } = useMyContext();
 
   const handleCadastre = () => {
-    openModal();
-    // setCadastrar(true);
-    // setShow(true);
-    // console.log('abrir modal', show);
-    // console.log('cadastrol', cadastrar);
+    modalRef.current && modalRef.current.show();
   };
 
   const handleEntrar = () => {
-    openModal();
-    // setCadastrar(false);
-    // setShow(true);
-    // console.log('cadastro', cadastrar);
-    // console.log('abrir modal', show);
+    modalRef.current && modalRef.current.show();
   };
 
-  console.log('context', context);
+  // console.log('context', context);
   return (
     <AppBar position='static'>
       <Toolbar>

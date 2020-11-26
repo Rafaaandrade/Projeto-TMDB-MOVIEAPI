@@ -1,4 +1,12 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useRef,
+  useCallback,
+  forwardRef,
+  useImperativeHandle,
+} from 'react';
 import API from './../../utils/api/api';
 import axios from 'axios';
 import { buildQueryParams } from './../../utils/functions/function-utils';
@@ -17,6 +25,7 @@ const initialState = [];
 
 export default function PesquisaModalContext({ children }) {
   const [context, setContext] = useState(initialState);
+  const modalRef = useRef(null);
 
   const handlePesquisaFilme = (data) => {
     const api = API.URL + data.pesquisa;
@@ -34,17 +43,16 @@ export default function PesquisaModalContext({ children }) {
       });
   };
 
-  const closeModal = () => {
-    setContext((prevState) => ({ ...prevState, showModal: false }));
-  };
+  useImperativeHandle(modalRef, () => modalRef.current, []);
+  const onOpen = useCallback(() => {
+    modalRef.current.show();
+  }, [modalRef]);
 
-  const openModal = () => {
-    setContext((prevState) => ({ ...prevState, showModal: true }));
-  };
+  const onClose = useCallback(() => {
+    modalRef.current.hide();
+  }, [modalRef]);
 
-  const openModalDetails = () => {
-    setContext((prevState) => ({ ...prevState, showDetailsModal: true }));
-  };
+
 
   const detalharFilme = (data) => {
     setContext((prevState) => ({
@@ -58,10 +66,10 @@ export default function PesquisaModalContext({ children }) {
       value={{
         handlePesquisaFilme,
         context,
-        closeModal,
-        openModal,
         detalharFilme,
-        openModalDetails,
+        onOpen,
+        onClose,
+        modalRef,
       }}
     >
       {children}
@@ -73,17 +81,17 @@ export function useMyContext() {
   const {
     handlePesquisaFilme,
     context,
-    closeModal,
-    openModal,
+    onOpen,
+    onClose,
     detalharFilme,
-    openModalDetails,
+    modalRef,
   } = useContext(myContext);
   return {
     handlePesquisaFilme,
     context,
-    closeModal,
-    openModal,
+    onOpen,
+    onClose,
     detalharFilme,
-    openModalDetails,
+    modalRef,
   };
 }

@@ -13,7 +13,7 @@ const CardFilmes = () => {
   const styles = useStyles();
   const { context, detalharFilme, openModalDetails } = useMyContext();
 
-  // const resto = filme && filme.length % 3;
+  const resto = context.filmes && context.filmes.length % 3;
 
   const clickSaibaMais = (data) => {
     detalharFilme(data);
@@ -49,9 +49,9 @@ const CardFilmes = () => {
             </Card>
           </div>
         ))}
-      {/* {Array.apply(null, { length: 3 - resto }).map((r) => (
+      {Array.apply(null, { length: 3 - resto }).map((r) => (
         <div className={styles.blankCard}></div>
-      ))} */}
+      ))}
     </div>
   );
 };

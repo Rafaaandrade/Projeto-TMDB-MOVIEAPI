@@ -8,13 +8,12 @@ import Button from '@material-ui/core/Button';
 import { schemaForms } from './../../utils/yup/schema';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
-import { useMyContext } from './../Context/context';
 
 const OnSubmit = (data) => {
   console.log(data);
 };
 
-const Formulario = ({ cadastrar }) => {
+const Formulario = ({ cadastrar, ref }) => {
   const styles = useStyles();
   const methods = useForm({ resolver: yupResolver(schemaForms) });
   const { control, handleSubmit, errors } = methods;
@@ -24,6 +23,7 @@ const Formulario = ({ cadastrar }) => {
     methods.setValue('email', '');
     methods.setValue('senha', '');
   };
+
   return (
     <Paper className={styles.boxFormulario}>
       <FormProvider {...methods}>
