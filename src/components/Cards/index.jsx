@@ -11,14 +11,13 @@ import { useMyContext } from './../Context/context';
 
 const CardFilmes = () => {
   const styles = useStyles();
-  const { context, detalharFilme, openModalDetails } = useMyContext();
+  const { context, detalharFilme, modalFilmeRef } = useMyContext();
 
   const resto = context.filmes && context.filmes.length % 3;
 
   const clickSaibaMais = (data) => {
+    modalFilmeRef.current && modalFilmeRef.current.show();
     detalharFilme(data);
-    openModalDetails();
-    // setShowModal(true);
   };
 
   return (

@@ -4,62 +4,47 @@ import React, {
   useContext,
   useRef,
   useCallback,
-  forwardRef,
-  useImperativeHandle,
 } from 'react';
 import API from './../../utils/api/api';
 import axios from 'axios';
 import { buildQueryParams } from './../../utils/functions/function-utils';
 
 const myContext = createContext();
-// const initialState = [
-//   {
-//     filmes: [],
-//     selected: null,
-//     showModalLogin: false,
-//     showModalDetalhes: false,
-//     isCadastro: false,
-//   },
-// ];
-const initialState = [];
+
+const initialState = {
+  filmes: [],
+  selected: {},
+  loading: false,
+};
+// const initialState = [];
 
 export default function PesquisaModalContext({ children }) {
   const [context, setContext] = useState(initialState);
   const modalRef = useRef(null);
+  const modalFilmeRef = useRef(null);
 
-  const handlePesquisaFilme = (data) => {
+  const handlePesquisaFilme = async (data) => {
     const api = API.URL + data.pesquisa;
     buildQueryParams(api);
-    axios
+    await axios
       .get(api)
       .then((response) => {
-        const resultado = response.data.results;
-        setContext((prevState) => ({ ...prevState, filmes: resultado }));
-
-        console.log(context);
+        setContext((prevState) => ({
+          ...prevState,
+          filmes: response.data.results,
+        }));
       })
       .catch((error) => {
         console.warn(error);
       });
   };
 
-  useImperativeHandle(modalRef, () => modalRef.current, []);
-  const onOpen = useCallback(() => {
-    modalRef.current.show();
-  }, [modalRef]);
-
-  const onClose = useCallback(() => {
-    modalRef.current.hide();
-  }, [modalRef]);
-
-
-
-  const detalharFilme = (data) => {
-    setContext((prevState) => ({
-      ...prevState,
-      saibaMais: data,
-    }));
-  };
+  const detalharFilme = useCallback(
+    (data) => {
+      setContext((prevState) => ({ ...prevState, selected: data }));
+    },
+    [setContext]
+  );
 
   return (
     <myContext.Provider
@@ -67,9 +52,8 @@ export default function PesquisaModalContext({ children }) {
         handlePesquisaFilme,
         context,
         detalharFilme,
-        onOpen,
-        onClose,
         modalRef,
+        modalFilmeRef,
       }}
     >
       {children}
@@ -81,17 +65,15 @@ export function useMyContext() {
   const {
     handlePesquisaFilme,
     context,
-    onOpen,
-    onClose,
     detalharFilme,
     modalRef,
+    modalFilmeRef,
   } = useContext(myContext);
   return {
     handlePesquisaFilme,
     context,
-    onOpen,
-    onClose,
     detalharFilme,
     modalRef,
+    modalFilmeRef,
   };
 }

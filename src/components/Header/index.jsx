@@ -29,7 +29,6 @@ const Header = () => {
     modalRef.current && modalRef.current.show();
   };
 
-  // console.log('context', context);
   return (
     <AppBar position='static'>
       <Toolbar>

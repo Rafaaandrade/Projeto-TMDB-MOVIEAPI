@@ -1,16 +1,37 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, {
+  useState,
+  useCallback,
+  useImperativeHandle,
+  forwardRef,
+} from 'react';
 import Modal from '@material-ui/core/Modal';
 import DetalharFilme from './index';
 import { useMyContext } from './../../Context/context';
 
 const ModalDetalharFilme = () => {
-  const { closeModal, openModal, modalRef } = useMyContext();
+  const { modalFilmeRef } = useMyContext();
+  const [open, setOpen] = useState(false);
+
+  useImperativeHandle(modalFilmeRef, () => ({
+    show: () => handleOpen(),
+    hide: () => handleClose(),
+  }));
+
+  const handleClose = useCallback(() => {
+    setOpen(false);
+  }, [setOpen]);
+
+  const handleOpen = useCallback(() => {
+    setOpen(true);
+  }, [setOpen]);
+
+  console.log('openModalDetalhes', open);
 
   return (
-    <Modal>
+    <Modal open={open} onClose={handleClose} ref={modalFilmeRef}>
       <DetalharFilme />
     </Modal>
   );
 };
 
-export default ModalDetalharFilme;
+export default forwardRef(ModalDetalharFilme);
