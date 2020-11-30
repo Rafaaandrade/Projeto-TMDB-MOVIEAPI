@@ -24,8 +24,8 @@ const CardFilmes = () => {
     <div className={styles.cardsContainer}>
       {context.filmes &&
         context.filmes.map((f) => (
-          <div className={styles.cards}>
-            <Card key={f.id}>
+          <div className={styles.cards} key={f.id}>
+            <Card>
               <CardMedia component='img' image={concatenar(f.poster_path)} />
               <CardContent className={styles.cardFilme}>
                 <Typography variant='body2' color='textSecondary' component='p'>
@@ -48,8 +48,8 @@ const CardFilmes = () => {
             </Card>
           </div>
         ))}
-      {Array.apply(null, { length: 3 - resto }).map((r) => (
-        <div className={styles.blankCard}></div>
+      {Array.apply(null, { length: 3 - resto }).map((r, index) => (
+        <div className={styles.blankCard} key={index}></div>
       ))}
     </div>
   );

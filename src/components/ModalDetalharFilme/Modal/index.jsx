@@ -25,7 +25,7 @@ const ModalDetalharFilme = () => {
     setOpen(true);
   }, [setOpen]);
 
-  console.log('openModalDetalhes', open);
+  // console.log('openModalDetalhes', open);
 
   return (
     <Modal open={open} onClose={handleClose} ref={modalFilmeRef}>

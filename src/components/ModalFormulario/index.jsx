@@ -1,16 +1,13 @@
 import Modal from '@material-ui/core/Modal';
-import React, {
-  useState,
-  useCallback,
-  useImperativeHandle,
-  forwardRef,
-} from 'react';
+import React, { useState, useCallback, useImperativeHandle } from 'react';
 import Formulario from '../Formulario/index';
 import { useMyContext } from './../Context/context';
 
 const ModalFormulario = () => {
   const [open, setOpen] = useState(false);
   const { modalRef } = useMyContext();
+
+  console.log('modalFormulario', open);
 
   useImperativeHandle(modalRef, () => ({
     show: () => handleOpen(),
@@ -31,4 +28,4 @@ const ModalFormulario = () => {
     </Modal>
   );
 };
-export default forwardRef(ModalFormulario);
+export default ModalFormulario;

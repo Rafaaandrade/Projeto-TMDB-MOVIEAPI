@@ -29,6 +29,11 @@ export const useStyles = makeStyles(() => ({
     width: '30%',
     align: 'right',
   },
+  divRadio: {
+    width: '10%',
+    display: 'flex',
+    flexDirection: 'row',
+  },
 }));
 
 export default useStyles;

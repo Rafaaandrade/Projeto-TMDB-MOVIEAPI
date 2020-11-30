@@ -1,6 +1,6 @@
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { Controller, FormProvider } from 'react-hook-form';
 import useStyles from './styles';
 import TextField from '@material-ui/core/TextField';
@@ -8,15 +8,17 @@ import Button from '@material-ui/core/Button';
 import { schemaForms } from './../../utils/yup/schema';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
+import { useMyContext } from './../Context/context';
 
 const OnSubmit = (data) => {
   console.log(data);
 };
 
-const Formulario = ({ cadastrar, ref }) => {
+const Formulario = () => {
   const styles = useStyles();
   const methods = useForm({ resolver: yupResolver(schemaForms) });
   const { control, handleSubmit, errors } = methods;
+  const { context } = useMyContext();
 
   const clear = () => {
     methods.setValue('usuario', '');
@@ -31,13 +33,14 @@ const Formulario = ({ cadastrar, ref }) => {
           <div className={styles.boxConteudo}>
             <Typography component='h3' headline='h2'>
               Seja bem vindo,
-              {cadastrar ? 'faça seu cadastro' : 'faça seu login'}
+              {context.isCadastro ? 'faça seu cadastro' : 'faça seu login'}
             </Typography>
             <Controller
               as={TextField}
               label='Digite o nome de usuario'
               control={control}
               name='usuario'
+              defaultValue=''
             />
             <br />
             {errors.usuario?.message}
@@ -46,6 +49,7 @@ const Formulario = ({ cadastrar, ref }) => {
               label='Digite seu email'
               name='email'
               control={control}
+              defaultValue=''
             />
             <br />
             {errors.email?.message}
@@ -55,6 +59,7 @@ const Formulario = ({ cadastrar, ref }) => {
               name='senha'
               control={control}
               type='password'
+              defaultValue=''
             />
             <br />
             {errors.senha?.message}
@@ -72,7 +77,7 @@ const Formulario = ({ cadastrar, ref }) => {
                 control={control}
                 className={styles.btn}
               >
-                {cadastrar ? 'Cadastro' : 'Login'}
+                {context.isCadastro ? 'Cadastro' : 'Login'}
               </Button>
               <Button
                 variant='contained'
@@ -91,4 +96,4 @@ const Formulario = ({ cadastrar, ref }) => {
   );
 };
 
-export default Formulario;
+export default forwardRef(Formulario);
