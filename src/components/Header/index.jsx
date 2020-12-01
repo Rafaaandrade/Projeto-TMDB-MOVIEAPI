@@ -18,11 +18,15 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
+import FieldWrapper from './../FieldWrapper/FieldWrapper';
 
 const Header = () => {
   const styles = useStyles();
-  const [state, setState] = useState({ data: {} });
-  const methods = useForm({ resolver: yupResolver(schemaHeader) });
+  const [value, setValue] = useState();
+  const methods = useForm({
+    reValidateMode: 'onBlur',
+    resolver: yupResolver(schemaHeader),
+  });
   const { control, handleSubmit, errors } = methods;
   const {
     handlePesquisaFilme,
@@ -32,6 +36,25 @@ const Header = () => {
     handleCadastre,
     handleEntrar,
   } = useMyContext();
+
+  const handleEscolha = (data) => {
+    if (data.escolhas === 'filme') {
+      handlePesquisaFilme(data);
+      console.log('e um filme', data);
+    }
+    if (data.escolhas === 'serie') {
+      handlePesquisaSeries(data);
+      console.log('e uma serie', data);
+    }
+    if (data.escolhas === 'pessoa') {
+      handlePesquisaPessoa(data);
+      console.log('e uma pessoa', data);
+    }
+  };
+
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
 
   return (
     <AppBar position='static'>
@@ -45,31 +68,43 @@ const Header = () => {
             Pesquise aqui por:
           </Typography>
           <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(handlePesquisaFilme)}>
+            <form onSubmit={handleSubmit(handleEscolha)}>
               <FormControl component='fieldset' size='small'>
-                <Controller
+                <FieldWrapper
+                  required
                   as={RadioGroup}
                   aria-label='escolhas'
                   name='escolhas'
-                  defaultValue=''
+                  errors={errors}
+                  control={control}
+                  value={value}
+                  defaultValue={value}
                 >
                   <FormControlLabel
-                    value='filme'
-                    control={<Radio />}
+                    onChange={handleChange}
                     label='Filme'
                     name='filme'
+                    value='filme'
+                    errors={errors}
+                    control={<Radio />}
                   />
                   <FormControlLabel
-                    value='series'
+                    onChange={handleChange}
+                    label='Série'
+                    name='serie'
+                    value='serie'
+                    errors={errors}
                     control={<Radio />}
-                    label='Series'
                   />
                   <FormControlLabel
-                    value='pessoas'
+                    onChange={handleChange}
+                    label='Pessoa'
+                    name='pessoa'
+                    errors={errors}
                     control={<Radio />}
-                    label='Pessoas'
+                    value='pessoa'
                   />
-                </Controller>
+                </FieldWrapper>
               </FormControl>
               <Controller as={Input} name='pesquisa' defaultValue='' />
               <IconButton type='submit' control={control}>

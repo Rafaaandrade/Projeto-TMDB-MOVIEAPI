@@ -4,6 +4,7 @@ import React, {
   useContext,
   useRef,
   useCallback,
+  useEffect,
 } from 'react';
 import axios from 'axios';
 import { buildQueryParams } from './../../utils/functions/function-utils';
@@ -19,14 +20,25 @@ const initialState = {
   loading: false,
   isCadastro: false,
 };
-// const initialState = [];
 
 export default function PesquisaModalContext({ children }) {
   const [context, setContext] = useState(initialState);
   const modalRef = useRef(null);
   const modalFilmeRef = useRef(null);
 
+  //Adicionar localStorage
+  useEffect(() => {
+    localStorage.setItem('contexto', JSON.stringify(context));
+  }, [context]);
+
+  //Receber do localStorage
+  useEffect(() => {
+    const dados = JSON.parse(localStorage.getItem('contexto'));
+    if (dados) setContext(dados);
+  }, []);
+
   const handlePesquisaFilme = async (data) => {
+    // console.log(data);
     const api = ENDPOINTS.FILME + data.pesquisa;
     buildQueryParams(api);
     await axios
@@ -43,6 +55,7 @@ export default function PesquisaModalContext({ children }) {
   };
 
   const handlePesquisaSeries = async (data) => {
+    // console.log(data);
     const api = ENDPOINTS.SERIE + data.pesquisa;
     buildQueryParams(api);
     await axios
@@ -59,6 +72,7 @@ export default function PesquisaModalContext({ children }) {
   };
 
   const handlePesquisaPessoa = async (data) => {
+    // console.log(data);
     const api = ENDPOINTS.PESSOA + data.pesquisa;
     buildQueryParams(api);
     await axios
@@ -121,6 +135,8 @@ export function useMyContext() {
     modalFilmeRef,
     handleCadastre,
     handleEntrar,
+    handlePesquisaSeries,
+    handlePesquisaPessoa,
   } = useContext(myContext);
   return {
     handlePesquisaFilme,
@@ -130,5 +146,7 @@ export function useMyContext() {
     modalFilmeRef,
     handleCadastre,
     handleEntrar,
+    handlePesquisaSeries,
+    handlePesquisaPessoa,
   };
 }

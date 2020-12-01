@@ -7,7 +7,7 @@ const ModalFormulario = () => {
   const [open, setOpen] = useState(false);
   const { modalRef } = useMyContext();
 
-  console.log('modalFormulario', open);
+  // console.log('modalFormulario', open);
 
   useImperativeHandle(modalRef, () => ({
     show: () => handleOpen(),
