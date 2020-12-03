@@ -14,3 +14,8 @@ export const buildQueryParams = (api_url) => {
     .map((pair) => pair.map(encodeURIComponent).join('='))
     .join('&');
 };
+
+export const chamarLoading = (t = 1000) =>
+  new Promise((resolve) => {
+    setTimeout(resolve, t);
+  });

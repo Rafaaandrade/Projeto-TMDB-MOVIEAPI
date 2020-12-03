@@ -6,8 +6,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import React from 'react';
 import useStyles from './styles';
-import { concatenar } from './../../utils/functions/function-utils';
-import { useMyContext } from './../Context/context';
+import { concatenar } from './../../../utils/functions/function-utils';
+import { useMyContext } from './../../Context/context';
 
 const CardFilmes = () => {
   const styles = useStyles();

@@ -30,9 +30,10 @@ export const useStyles = makeStyles(() => ({
     align: 'right',
   },
   divRadio: {
-    width: '10%',
+    width: '40%',
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
+    backgroundColor: 'black',
   },
 }));
 

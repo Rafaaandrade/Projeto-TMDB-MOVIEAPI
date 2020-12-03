@@ -1,7 +1,10 @@
 import * as yup from 'yup';
 
 export const schemaHeader = yup.object().shape({
-  pesquisa: yup.string().max(30, 'Máximo de 30 carácteres'),
+  pesquisa: yup
+    .string()
+    .max(30, 'Máximo de 30 carácteres')
+    .required('O campo precisa ser preenchido'),
 });
 
 export const schemaForms = yup.object().shape({

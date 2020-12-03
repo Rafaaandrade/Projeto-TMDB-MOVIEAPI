@@ -22,7 +22,7 @@ const FieldWrapper = ({
             {...props}
             {...rest}
             ref={register}
-            error={Boolean(error)}
+            error={error}
             className={className}
           />
         )}

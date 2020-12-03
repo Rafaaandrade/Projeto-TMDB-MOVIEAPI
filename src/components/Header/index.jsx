@@ -6,19 +6,19 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Input from '@material-ui/core/Input';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 import React, { useState } from 'react';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { schemaHeader } from './../../utils/yup/schema';
-import useStyles from './styles';
 import { useMyContext } from './../Context/context';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FieldWrapper from './../FieldWrapper/FieldWrapper';
+import FieldWrapper from './../FieldWrapper/index';
+import useStyles from './styles';
 
 const Header = () => {
   const styles = useStyles();
@@ -77,8 +77,8 @@ const Header = () => {
                   name='escolhas'
                   errors={errors}
                   control={control}
-                  value={value}
                   defaultValue={value}
+                  row
                 >
                   <FormControlLabel
                     onChange={handleChange}

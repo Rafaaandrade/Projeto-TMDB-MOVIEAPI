@@ -1,14 +1,13 @@
+import { yupResolver } from '@hookform/resolvers';
+import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import React, { forwardRef } from 'react';
-import { Controller, FormProvider } from 'react-hook-form';
+import { Controller, FormProvider, useForm } from 'react-hook-form';
+import { useMyContext } from './../../../Context/context';
+import { schemaForms } from './../../../../utils/yup/schema';
 import useStyles from './styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import { schemaForms } from './../../utils/yup/schema';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers';
-import { useMyContext } from './../Context/context';
 
 const OnSubmit = (data) => {
   console.log(data);

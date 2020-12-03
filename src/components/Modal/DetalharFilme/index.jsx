@@ -1,12 +1,12 @@
+import Modal from '@material-ui/core/Modal';
 import React, {
-  useState,
+  forwardRef,
   useCallback,
   useImperativeHandle,
-  forwardRef,
+  useState,
 } from 'react';
-import Modal from '@material-ui/core/Modal';
-import DetalharFilme from './index';
 import { useMyContext } from './../../Context/context';
+import DetalharFilme from './Conteudo/index';
 
 const ModalDetalharFilme = () => {
   const { modalFilmeRef } = useMyContext();

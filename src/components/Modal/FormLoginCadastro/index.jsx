@@ -1,7 +1,7 @@
 import Modal from '@material-ui/core/Modal';
 import React, { useState, useCallback, useImperativeHandle } from 'react';
-import Formulario from '../Formulario/index';
-import { useMyContext } from './../Context/context';
+import Formulario from './Conteudo/index';
+import { useMyContext } from './../../Context/context';
 
 const ModalFormulario = () => {
   const [open, setOpen] = useState(false);
