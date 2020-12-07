@@ -2,6 +2,7 @@ import React from 'react';
 import CardFilmes from './components/Cards/Filmes/index';
 import CardSeries from './components/Cards/Series/index';
 import CardWrapper from './components/CardWraper/index';
+import CardPessoas from './components/Cards/Pessoas/index';
 import PesquisaModalContext from './components/Context/context';
 import Header from './components/Header/index';
 import ModalDetalharFilme from './components/Modal/DetalharFilme/index';
@@ -16,6 +17,7 @@ function App() {
         <CardWrapper>
           <CardFilmes />
           <CardSeries />
+          <CardPessoas />
         </CardWrapper>
         <ModalDetalharFilme />
       </PesquisaModalContext>

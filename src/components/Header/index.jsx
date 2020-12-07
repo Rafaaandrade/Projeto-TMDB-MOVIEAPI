@@ -22,7 +22,7 @@ import useStyles from './styles';
 
 const Header = () => {
   const styles = useStyles();
-  const [value, setValue] = useState();
+  const [value, setValue] = useState('filme');
   const methods = useForm({
     reValidateMode: 'onBlur',
     resolver: yupResolver(schemaHeader),
