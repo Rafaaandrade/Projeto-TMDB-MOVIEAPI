@@ -1,8 +1,5 @@
 import React from 'react';
-import CardFilmes from './components/Cards/Filmes/index';
-import CardSeries from './components/Cards/Series/index';
-import CardWrapper from './components/CardWraper/index';
-import CardPessoas from './components/Cards/Pessoas/index';
+import CardUI from './components/CardUI';
 import PesquisaModalContext from './components/Context/context';
 import Header from './components/Header/index';
 import ModalDetalharFilme from './components/Modal/DetalharFilme/index';
@@ -14,11 +11,7 @@ function App() {
       <PesquisaModalContext>
         <Header />
         <ModalFormulario />
-        <CardWrapper>
-          <CardFilmes />
-          <CardSeries />
-          <CardPessoas />
-        </CardWrapper>
+        <CardUI />
         <ModalDetalharFilme />
       </PesquisaModalContext>
     </div>
