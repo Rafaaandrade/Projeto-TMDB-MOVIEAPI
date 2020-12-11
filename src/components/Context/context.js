@@ -110,13 +110,13 @@ export default function PesquisaModalContext({ children }) {
   return (
     <myContext.Provider
       value={{
-        handlePesquisaFilme,
         context,
         detalharFilme,
         modalRef,
         modalFilmeRef,
         handleCadastre,
         handleEntrar,
+        handlePesquisaFilme,
         handlePesquisaSeries,
         handlePesquisaPessoa,
       }}
@@ -128,8 +128,6 @@ export default function PesquisaModalContext({ children }) {
 
 export function useMyContext() {
   const {
-    handlePesquisaFilme,
-    context,
     detalharFilme,
     modalRef,
     modalFilmeRef,
@@ -137,16 +135,18 @@ export function useMyContext() {
     handleEntrar,
     handlePesquisaSeries,
     handlePesquisaPessoa,
+    handlePesquisaFilme,
+    ...context
   } = useContext(myContext);
   return {
-    handlePesquisaFilme,
-    context,
     detalharFilme,
     modalRef,
     modalFilmeRef,
     handleCadastre,
     handleEntrar,
+    handlePesquisaFilme,
     handlePesquisaSeries,
     handlePesquisaPessoa,
+    ...context,
   };
 }

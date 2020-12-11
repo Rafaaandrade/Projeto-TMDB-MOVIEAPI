@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useMyContext } from './../../Context/context';
+
 import CardContentFilme from './CardContentFilme/index';
 import CardUI from './../../components/CardUI';
 import CardContentSerie from './CardContentSerie/index';

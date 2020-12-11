@@ -13,8 +13,8 @@ const CardContentPessoa = ({ pessoa }) => {
       <Typography variant='body1' color='textSecondary' component='p'>
         Filmes trabalhados:
       </Typography>
-      {p.known_for &&
-        p.known_for.map((x) => (
+      {pessoa.known_for_department &&
+        pessoa.known_for.map((x) => (
           <Typography variant='body1' color='textSecondary' component='p'>
             Filme: {x.title} <br />
             Media de votos: {x.vote_average}
