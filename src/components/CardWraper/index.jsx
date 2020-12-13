@@ -8,9 +8,9 @@ import CardContentPessoa from './CardContentPessoa/index';
 const CardWrapper = ({ lista = [] }) => {
   return (
     <>
-      {lista.map((l) => (
+      {lista.filmes.map((l) => (
         <CardUI>
-          {l.first_air_date ? (
+          {l.serie && l.first_air_date ? (
             <CardContentSerie serie={l} />
           ) : l.known_for ? (
             <CardContentPessoa pessoa={l} />
