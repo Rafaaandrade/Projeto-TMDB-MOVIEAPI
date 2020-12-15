@@ -7,11 +7,14 @@ import CardWrapper from './../../components/CardWraper';
 
 const Home = () => {
   const { context } = useMyContext();
+  const resto = context && context.length % 3;
   return (
     <>
       <Header />
       <ModalFormulario />
-      <CardWrapper lista={context} />
+      <CardWrapper lista={context.filmes} resto={resto} />
+      <CardWrapper lista={context.series} resto={resto} />
+      <CardWrapper lista={context.pessoas} resto={resto} />
       <ModalDetalharFilme />
     </>
   );

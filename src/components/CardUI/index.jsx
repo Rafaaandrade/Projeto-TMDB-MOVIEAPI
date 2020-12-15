@@ -9,29 +9,32 @@ import { concatenar } from './../../utils/functions/function-utils';
 import useStyles from './styles';
 
 const CardUI = ({ children, img, filme }) => {
-  const clickSaibaMais = () => {};
   const styles = useStyles();
+  const { detalharFilme, modalFilmeRef } = useMyContext();
+
+  const clickSaibaMais = (data) => {
+    modalFilmeRef.current && modalFilmeRef.current.show();
+    detalharFilme(data);
+  };
 
   return (
-    <div className={styles.cardsContainer}>
-      <div className={styles.cards}>
-        <Card>
-          <CardMedia component='img' image={concatenar(img)} />
-          <CardContent className={styles.cardFilme}>{children}</CardContent>
-          <CardActions>
-            <Button
-              onClick={() => clickSaibaMais(filme)}
-              size='small'
-              color='primary'
-            >
-              Saiba Mais
-            </Button>
-            <Button size='small' color='primary'>
-              Excluir
-            </Button>
-          </CardActions>
-        </Card>
-      </div>
+    <div className={styles.cards}>
+      <Card>
+        <CardMedia component='img' image={concatenar(img)} />
+        <CardContent className={styles.cardFilme}>{children}</CardContent>
+        <CardActions>
+          <Button
+            onClick={() => clickSaibaMais(filme)}
+            size='small'
+            color='primary'
+          >
+            Saiba Mais
+          </Button>
+          <Button size='small' color='primary'>
+            Excluir
+          </Button>
+        </CardActions>
+      </Card>
     </div>
   );
 };

@@ -136,7 +136,7 @@ export function useMyContext() {
     handlePesquisaSeries,
     handlePesquisaPessoa,
     handlePesquisaFilme,
-    ...context
+    context,
   } = useContext(myContext);
   return {
     detalharFilme,
@@ -147,6 +147,6 @@ export function useMyContext() {
     handlePesquisaFilme,
     handlePesquisaSeries,
     handlePesquisaPessoa,
-    ...context,
+    context,
   };
 }
