@@ -105,6 +105,13 @@ export default function PesquisaModalContext({ children }) {
     setContext((prevState) => ({ ...prevState, isCadastro: false }));
   }, [setContext]);
 
+  const handleChange = useCallback(
+    (ev) => {
+      setContext((prevState) => ({ ...prevState, pesquisa: ev.target.value }));
+    },
+    [setContext]
+  );
+
   console.log('context', context);
 
   return (
@@ -116,6 +123,7 @@ export default function PesquisaModalContext({ children }) {
         modalFilmeRef,
         handleCadastre,
         handleEntrar,
+        handleChange,
         handlePesquisaFilme,
         handlePesquisaSeries,
         handlePesquisaPessoa,
@@ -133,6 +141,7 @@ export function useMyContext() {
     modalFilmeRef,
     handleCadastre,
     handleEntrar,
+    handleChange,
     handlePesquisaSeries,
     handlePesquisaPessoa,
     handlePesquisaFilme,
@@ -144,6 +153,7 @@ export function useMyContext() {
     modalFilmeRef,
     handleCadastre,
     handleEntrar,
+    handleChange,
     handlePesquisaFilme,
     handlePesquisaSeries,
     handlePesquisaPessoa,

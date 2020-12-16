@@ -14,14 +14,13 @@ import Input from '@material-ui/core/Input';
 import useStyles from './styles';
 
 const FormPesquisa = () => {
-  const [value, setValue] = useState('filme');
-
   const styles = useStyles();
 
   const {
     handlePesquisaFilme,
     handlePesquisaSeries,
     handlePesquisaPessoa,
+    handleChange,
   } = useMyContext();
 
   const methods = useForm({
@@ -32,22 +31,19 @@ const FormPesquisa = () => {
   const { control, handleSubmit, errors } = methods;
 
   const handleEscolha = (data) => {
-    if (data.escolhas === 'filme') {
-      handlePesquisaFilme(data);
-      console.log('e um filme', data);
-    }
-    if (data.escolhas === 'serie') {
-      handlePesquisaSeries(data);
-      console.log('e uma serie', data);
-    }
-    if (data.escolhas === 'pessoa') {
-      handlePesquisaPessoa(data);
-      console.log('e uma pessoa', data);
-    }
-  };
+    console.log(data);
+    switch (data.escolhas) {
+      case 'filme':
+        return handlePesquisaFilme(data);
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
+      case 'serie':
+        return handlePesquisaSeries(data);
+
+      case 'pessoa':
+        return handlePesquisaPessoa(data);
+
+      default:
+    }
   };
 
   return (
@@ -62,7 +58,7 @@ const FormPesquisa = () => {
               name='escolhas'
               errors={errors}
               control={control}
-              defaultValue={value}
+              defaultValue=''
               row
             >
               <FormControlLabel
