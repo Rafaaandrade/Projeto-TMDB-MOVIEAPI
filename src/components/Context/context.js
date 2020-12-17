@@ -13,10 +13,8 @@ import ENDPOINTS from './../../utils/endpoints/endpoints';
 const myContext = createContext();
 
 const initialState = {
-  filmes: [],
+  lista: [],
   selected: {},
-  series: [],
-  pessoas: [],
   loading: false,
   isCadastro: false,
 };
@@ -46,7 +44,7 @@ export default function PesquisaModalContext({ children }) {
       .then((response) => {
         setContext((prevState) => ({
           ...prevState,
-          filmes: response.data.results,
+          lista: response.data.results,
         }));
       })
       .catch((error) => {
@@ -63,7 +61,7 @@ export default function PesquisaModalContext({ children }) {
       .then((response) => {
         setContext((prevState) => ({
           ...prevState,
-          series: response.data.results,
+          lista: response.data.results,
         }));
       })
       .catch((error) => {
@@ -80,7 +78,7 @@ export default function PesquisaModalContext({ children }) {
       .then((response) => {
         setContext((prevState) => ({
           ...prevState,
-          pessoas: response.data.results,
+          lista: response.data.results,
         }));
       })
       .catch((error) => {
@@ -105,13 +103,6 @@ export default function PesquisaModalContext({ children }) {
     setContext((prevState) => ({ ...prevState, isCadastro: false }));
   }, [setContext]);
 
-  const handleChange = useCallback(
-    (ev) => {
-      setContext((prevState) => ({ ...prevState, pesquisa: ev.target.value }));
-    },
-    [setContext]
-  );
-
   console.log('context', context);
 
   return (
@@ -123,7 +114,6 @@ export default function PesquisaModalContext({ children }) {
         modalFilmeRef,
         handleCadastre,
         handleEntrar,
-        handleChange,
         handlePesquisaFilme,
         handlePesquisaSeries,
         handlePesquisaPessoa,
@@ -141,7 +131,6 @@ export function useMyContext() {
     modalFilmeRef,
     handleCadastre,
     handleEntrar,
-    handleChange,
     handlePesquisaSeries,
     handlePesquisaPessoa,
     handlePesquisaFilme,
@@ -153,7 +142,6 @@ export function useMyContext() {
     modalFilmeRef,
     handleCadastre,
     handleEntrar,
-    handleChange,
     handlePesquisaFilme,
     handlePesquisaSeries,
     handlePesquisaPessoa,

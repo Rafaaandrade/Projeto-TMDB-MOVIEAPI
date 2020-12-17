@@ -14,19 +14,23 @@ import Input from '@material-ui/core/Input';
 import useStyles from './styles';
 
 const FormPesquisa = () => {
+  const [value, setValue] = useState();
   const styles = useStyles();
 
   const {
     handlePesquisaFilme,
     handlePesquisaSeries,
     handlePesquisaPessoa,
-    handleChange,
   } = useMyContext();
 
   const methods = useForm({
     reValidateMode: 'onBlur',
     resolver: yupResolver(schemaHeader),
   });
+
+  const handleChange = (ev) => {
+    setValue(ev.target.value);
+  };
 
   const { control, handleSubmit, errors } = methods;
 
@@ -58,7 +62,7 @@ const FormPesquisa = () => {
               name='escolhas'
               errors={errors}
               control={control}
-              defaultValue=''
+              defaultValue={value}
               row
             >
               <FormControlLabel

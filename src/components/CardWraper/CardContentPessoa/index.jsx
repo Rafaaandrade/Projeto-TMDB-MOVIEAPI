@@ -2,6 +2,7 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
 const CardContentPessoa = ({ pessoa }) => {
+  console.log('pessoa', pessoa);
   return (
     <>
       <Typography variant='body1' color='textSecondary' component='p'>
@@ -15,7 +16,12 @@ const CardContentPessoa = ({ pessoa }) => {
       </Typography>
       {pessoa.known_for_department &&
         pessoa.known_for.map((x) => (
-          <Typography variant='body1' color='textSecondary' component='p'>
+          <Typography
+            variant='body1'
+            color='textSecondary'
+            component='p'
+            key={x.id}
+          >
             Filme: {x.title} <br />
             Media de votos: {x.vote_average}
           </Typography>

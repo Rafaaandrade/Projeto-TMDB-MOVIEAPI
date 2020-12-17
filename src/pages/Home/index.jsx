@@ -12,9 +12,7 @@ const Home = () => {
     <>
       <Header />
       <ModalFormulario />
-      <CardWrapper lista={context.filmes} resto={resto} />
-      <CardWrapper lista={context.series} resto={resto} />
-      <CardWrapper lista={context.pessoas} resto={resto} />
+      <CardWrapper lista={context.lista} resto={resto} />
       <ModalDetalharFilme />
     </>
   );
