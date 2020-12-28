@@ -1,22 +1,30 @@
-import React , {useState, useCallback, useImperativeHandle} from `react`;
+import React, {
+    useState,
+    useCallback,
+    useImperativeHandle,
+    forwardRef,
+} from 'react';
 import Modal from '@material-ui/core/Modal';
 
-const ModalUI = (ref) => {
+const ModalUI = (ref, { children }) => {
+    const [open, setOpen] = useState(false);
+    const handleOpen = useCallback(() => setOpen(true), [setOpen]);
+    const handleClose = useCallback(() => setOpen(false), [setOpen]);
 
-  const [state, setState] = useState();
-  const handleOpen = useCallback(() => setState(true), [setState])
-  const handleClose = useCallback(() => setState(false), [setState])
+    useImperativeHandle(ref, () => ({
+        show: () => handleOpen(),
+        hide: () => handleClose(),
+    }));
 
-  useImperativeHandle(ref, () => ({
-    show: () => handleOpen(),
-    hide: () => handleClose()
-}));
+    return (
+        <Modal
+            open={() => handleOpen()}
+            onClose={() => handleClose()}
+            ref={ref}
+        >
+            {children}
+        </Modal>
+    );
+};
 
-  return (
-    <Modal  open={open} onClose={handleClose} ref={ref}>
-      {children}
-    </Modal>
-  )
-}
-
-export default ModalUI;
+export default forwardRef(ModalUI);

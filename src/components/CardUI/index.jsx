@@ -8,13 +8,14 @@ import Button from '@material-ui/core/Button';
 import { concatenar } from './../../utils/functions/function-utils';
 import useStyles from './styles';
 
-const CardUI = ({ children, img, filme }) => {
+const CardUI = ({ children, img, obj }) => {
   const styles = useStyles();
   const { detalharFilme, modalFilmeRef } = useMyContext();
 
-  const clickSaibaMais = (data) => {
+  const clickSaibaMais = () => {
+    console.log('clickSaibaMais', obj);
     modalFilmeRef.current && modalFilmeRef.current.show();
-    detalharFilme(data);
+    detalharFilme(obj);
   };
 
   return (
@@ -23,11 +24,7 @@ const CardUI = ({ children, img, filme }) => {
         <CardMedia component='img' image={concatenar(img)} />
         <CardContent className={styles.cardFilme}>{children}</CardContent>
         <CardActions>
-          <Button
-            onClick={() => clickSaibaMais(filme)}
-            size='small'
-            color='primary'
-          >
+          <Button onClick={() => clickSaibaMais()} size='small' color='primary'>
             Saiba Mais
           </Button>
           <Button size='small' color='primary'>
