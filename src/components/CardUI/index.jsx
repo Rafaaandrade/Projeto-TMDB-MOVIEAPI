@@ -9,31 +9,37 @@ import { concatenar } from './../../utils/functions/function-utils';
 import useStyles from './styles';
 
 const CardUI = ({ children, img, obj }) => {
-  const styles = useStyles();
-  const { detalharFilme, modalFilmeRef } = useMyContext();
+    const styles = useStyles();
+    const { detalharFilme, modalFilmeRef } = useMyContext();
 
-  const clickSaibaMais = () => {
-    console.log('clickSaibaMais', obj);
-    modalFilmeRef.current && modalFilmeRef.current.show();
-    detalharFilme(obj);
-  };
+    const clickSaibaMais = () => {
+        console.log('clickSaibaMais', obj);
+        modalFilmeRef.current && modalFilmeRef.current.show();
+        detalharFilme(obj);
+    };
 
-  return (
-    <div className={styles.cards}>
-      <Card>
-        <CardMedia component='img' image={concatenar(img)} />
-        <CardContent className={styles.cardFilme}>{children}</CardContent>
-        <CardActions>
-          <Button onClick={() => clickSaibaMais()} size='small' color='primary'>
-            Saiba Mais
-          </Button>
-          <Button size='small' color='primary'>
-            Excluir
-          </Button>
-        </CardActions>
-      </Card>
-    </div>
-  );
+    return (
+        <div className={styles.cards}>
+            <Card>
+                <CardMedia component='img' image={concatenar(img)} />
+                <CardContent className={styles.cardFilme}>
+                    {children}
+                </CardContent>
+                <CardActions>
+                    <Button
+                        onClick={() => clickSaibaMais()}
+                        size='small'
+                        color='primary'
+                    >
+                        Saiba Mais
+                    </Button>
+                    <Button size='small' color='primary'>
+                        Excluir
+                    </Button>
+                </CardActions>
+            </Card>
+        </div>
+    );
 };
 
 export default CardUI;

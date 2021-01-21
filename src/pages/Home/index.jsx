@@ -8,12 +8,13 @@ import ModalWrapper from './../../components/ModalWrapper/';
 const Home = () => {
     const { context } = useMyContext();
     const resto = context && context.length % 3;
+
     return (
         <>
             <Header />
             <ModalFormulario />
             <CardWrapper lista={context.lista} resto={resto} />
-            {/* <ModalWrapper /> */}
+            <ModalWrapper />
         </>
     );
 };

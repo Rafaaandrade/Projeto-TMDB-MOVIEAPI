@@ -23,8 +23,6 @@ export default function PesquisaModalContext({ children }) {
     const [context, setContext] = useState(initialState);
     const modalRef = useRef(null);
     const modalFilmeRef = useRef(null);
-    const modalSerieRef = useRef(null);
-    const modalPessoaRef = useRef(null);
 
     //Adicionar localStorage
     useEffect(() => {
@@ -117,8 +115,6 @@ export default function PesquisaModalContext({ children }) {
                 detalharFilme,
                 modalRef,
                 modalFilmeRef,
-                modalSerieRef,
-                modalPessoaRef,
                 handleCadastre,
                 handleEntrar,
                 handlePesquisaFilme,
@@ -136,8 +132,6 @@ export function useMyContext() {
         detalharFilme,
         modalRef,
         modalFilmeRef,
-        modalSerieRef,
-        modalPessoaRef,
         handleCadastre,
         handleEntrar,
         handlePesquisaSeries,
@@ -149,8 +143,6 @@ export function useMyContext() {
         detalharFilme,
         modalRef,
         modalFilmeRef,
-        modalSerieRef,
-        modalPessoaRef,
         handleCadastre,
         handleEntrar,
         handlePesquisaFilme,

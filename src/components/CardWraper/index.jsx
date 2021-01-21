@@ -16,13 +16,9 @@ const CardWrapper = ({ lista = [], resto }) => {
                     key={l.id}
                     obj={l}
                 >
-                    {l.release_date ? <CardContentFilme filme={l} /> : ''}
-                    {l.first_air_date ? <CardContentSerie serie={l} /> : ''}
-                    {l.known_for_department ? (
-                        <CardContentPessoa pessoa={l} />
-                    ) : (
-                        ''
-                    )}
+                    {l.release_date && <CardContentFilme filme={l} />}
+                    {l.first_air_date && <CardContentSerie serie={l} />}
+                    {l.known_for_department && <CardContentPessoa pessoa={l} />}
                 </CardUI>
             ))}
             {Array.apply(null, { length: 3 - resto }).map((r, index) => (

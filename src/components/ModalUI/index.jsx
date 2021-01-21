@@ -5,9 +5,11 @@ import React, {
     forwardRef,
 } from 'react';
 import Modal from '@material-ui/core/Modal';
+import useStyles from './styles';
 
-const ModalUI = (ref, { children }) => {
+const ModalUI = ({ children }, ref) => {
     const [open, setOpen] = useState(false);
+    const styles = useStyles();
     const handleOpen = useCallback(() => setOpen(true), [setOpen]);
     const handleClose = useCallback(() => setOpen(false), [setOpen]);
 
@@ -17,12 +19,10 @@ const ModalUI = (ref, { children }) => {
     }));
 
     return (
-        <Modal
-            open={() => handleOpen()}
-            onClose={() => handleClose()}
-            ref={ref}
-        >
-            {children}
+        <Modal open={open} onClose={() => handleClose()}>
+            <div className={styles.modal}>
+                <div className={styles.modalContent}>{children}</div>
+            </div>
         </Modal>
     );
 };

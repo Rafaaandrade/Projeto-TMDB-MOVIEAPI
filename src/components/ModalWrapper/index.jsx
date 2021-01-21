@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { useMyContext } from '../../components/Context/context';
 import PessoaContent from '../Modal/PessoaContent';
 import SerieContent from '../Modal/SerieContent';
@@ -6,35 +6,17 @@ import FilmeContent from './../Modal/FilmeContent/index';
 import ModalUI from './../ModalUI/index';
 
 const ModalWrapper = () => {
-    const {
-        modalFilmeRef,
-        modalSerieRef,
-        modalPessoaRef,
-        modalRef,
-        context,
-    } = useMyContext();
-
-    // const checkRef = () => {
-    //     switch (context.ref) {
-    //         case 'filme':
-    //             return modalFilmeRef;
-
-    //         case 'serie':
-    //             return modalSerieRef;
-
-    //         case 'pessoa':
-    //             return modalPessoaRef;
-    //         default:
-    //     }
-    // };
+    const { modalFilmeRef, context } = useMyContext();
 
     return (
-        <ModalUI ref={modalRef}>
-            {context.ref === 'filme' && <FilmeContent />}
-            {context.ref === 'serie' && <SerieContent />}
-            {context.ref === 'pessoa' && <PessoaContent />}
+        <ModalUI ref={modalFilmeRef}>
+            {context.ref === 'filme' && <FilmeContent obj={context.selected} />}
+            {context.ref === 'serie' && <SerieContent obj={context.selected} />}
+            {context.ref === 'pessoa' && (
+                <PessoaContent obj={context.selected} />
+            )}
         </ModalUI>
     );
 };
 
-export default ModalWrapper;
+export default forwardRef(ModalWrapper);
