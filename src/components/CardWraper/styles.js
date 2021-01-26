@@ -8,11 +8,10 @@ export const useStyles = makeStyles(() => ({
     cardsContainer: {
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center',
+        alignItems: 'flex-start',
         flexWrap: 'wrap',
         marginTop: '20px',
         width: '100%',
-        height: '20%',
     },
 }));
 

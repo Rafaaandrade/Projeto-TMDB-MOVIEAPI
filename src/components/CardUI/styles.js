@@ -1,24 +1,24 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
-    cardFilme: {
-        height: '250px',
+    cardContent: {
+        minHeight: ({ height = 300 }) => height,
+        maxHeight: ({ height = 650 }) => height,
         width: '90%',
         wordWrap: 'overflowWrap',
+        textAlign: 'start',
     },
     cards: {
         display: 'flex-end',
         justifyContent: 'space-between',
-        width: '30%',
-        height: '25%',
+        width: '23%',
+        height: '20%',
+        marginBottom: '15px',
+        overFlow: 'hidden',
+        textOverflow: 'ellipsis',
     },
-    cardsContainer: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        marginTop: '20px',
-        width: '100%',
+    cardImage: {
+        height: 400,
     },
 }));
 

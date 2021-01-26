@@ -11,11 +11,7 @@ const CardWrapper = ({ lista = [], resto }) => {
     return (
         <div className={styles.cardsContainer}>
             {lista.map((l) => (
-                <CardUI
-                    img={l.poster_path || l.profile_path}
-                    key={l.id}
-                    obj={l}
-                >
+                <CardUI key={l.id} obj={l}>
                     {l.release_date && <CardContentFilme filme={l} />}
                     {l.first_air_date && <CardContentSerie serie={l} />}
                     {l.known_for_department && <CardContentPessoa pessoa={l} />}

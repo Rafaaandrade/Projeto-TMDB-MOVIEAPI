@@ -9,6 +9,7 @@ import React, {
 import axios from 'axios';
 import { buildQueryParams } from './../../utils/functions/function-utils';
 import ENDPOINTS from './../../utils/endpoints/endpoints';
+import API from '../../utils/api/api';
 
 const myContext = createContext();
 
@@ -36,6 +37,7 @@ export default function PesquisaModalContext({ children }) {
     }, []);
 
     const handlePesquisaFilme = async (data) => {
+        setLoading();
         // console.log(data);
         const api = ENDPOINTS.FILME + data.pesquisa;
         buildQueryParams(api);
@@ -51,10 +53,12 @@ export default function PesquisaModalContext({ children }) {
             .catch((error) => {
                 console.warn(error);
             });
+        setLoading();
     };
 
     const handlePesquisaSeries = async (data) => {
         // console.log(data);
+        setLoading();
         const api = ENDPOINTS.SERIE + data.pesquisa;
         buildQueryParams(api);
         await axios
@@ -69,15 +73,18 @@ export default function PesquisaModalContext({ children }) {
             .catch((error) => {
                 console.warn(error);
             });
+        setLoading();
     };
 
     const handlePesquisaPessoa = async (data) => {
+        setLoading();
         // console.log(data);
         const api = ENDPOINTS.PESSOA + data.pesquisa;
         buildQueryParams(api);
         await axios
             .get(api)
             .then((response) => {
+                // const apiDetalhes =
                 setContext((prevState) => ({
                     ...prevState,
                     lista: response.data.results,
@@ -87,6 +94,24 @@ export default function PesquisaModalContext({ children }) {
             .catch((error) => {
                 console.warn(error);
             });
+
+        setLoading();
+    };
+
+    const handlePesquisaPessoaCDetalhes = async (data) => {
+        console.log(data);
+        const api =
+            'https://api.themoviedb.org/3/person/' +
+            context.lista.id +
+            '?api_key=' +
+            API.KEY;
+        buildQueryParams(api);
+        await axios.get(api).then((response) => {
+            setContext((prevState) => ({
+                ...prevState,
+                lista: response.data.results,
+            }));
+        });
     };
 
     const detalharFilme = useCallback(
@@ -106,6 +131,13 @@ export default function PesquisaModalContext({ children }) {
         setContext((prevState) => ({ ...prevState, isCadastro: false }));
     }, [setContext]);
 
+    const setLoading = useCallback(() => {
+        setContext((prevState) => ({
+            ...prevState,
+            loading: !prevState.loading,
+        }));
+    }, [setContext]);
+
     console.log('context', context);
 
     return (
@@ -120,6 +152,8 @@ export default function PesquisaModalContext({ children }) {
                 handlePesquisaFilme,
                 handlePesquisaSeries,
                 handlePesquisaPessoa,
+                handlePesquisaPessoaCDetalhes,
+                setLoading,
             }}
         >
             {children}
@@ -137,6 +171,8 @@ export function useMyContext() {
         handlePesquisaSeries,
         handlePesquisaPessoa,
         handlePesquisaFilme,
+        handlePesquisaPessoaCDetalhes,
+        setLoading,
         context,
     } = useContext(myContext);
     return {
@@ -148,6 +184,8 @@ export function useMyContext() {
         handlePesquisaFilme,
         handlePesquisaSeries,
         handlePesquisaPessoa,
+        handlePesquisaPessoaCDetalhes,
+        setLoading,
         context,
     };
 }
