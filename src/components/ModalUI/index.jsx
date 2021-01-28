@@ -23,7 +23,7 @@ const ModalUI = ({ children }, ref) => {
     return (
         <Modal open={open} onClose={() => handleClose()}>
             <div className={styles.modal}>
-                <div className={styles.modalContent}>
+                <div>
                     <IconButton
                         className={styles.modalButton}
                         onClick={() => handleClose()}

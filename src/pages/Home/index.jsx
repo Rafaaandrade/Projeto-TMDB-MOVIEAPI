@@ -16,12 +16,13 @@ const Home = () => {
         <>
             <Header />
             <ModalFormulario />
+            <ModalFavoritos />
             {isLoading ? (
                 <Loading />
             ) : (
                 <CardWrapper lista={context.lista} resto={resto} />
             )}
-            <ModalFavoritos />
+
             <ModalWrapper />
         </>
     );

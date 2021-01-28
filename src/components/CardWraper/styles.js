@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     blankCard: {
-        width: '30%',
+        width: '40%',
         height: '100px',
     },
     cardsContainer: {
