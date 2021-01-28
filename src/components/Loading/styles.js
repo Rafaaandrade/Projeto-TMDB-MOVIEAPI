@@ -6,6 +6,7 @@ export const useStyles = makeStyles(() => ({
         alignItems: 'center',
         justifyContent: 'center',
         fontSize: '10',
+        marginTop: '100px',
     },
     effect: {
         marginRight: '10px',

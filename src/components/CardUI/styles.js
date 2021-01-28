@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles(() => ({
     cardContent: {
         minHeight: ({ height = 300 }) => height,
-        maxHeight: ({ height = 650 }) => height,
+        maxHeight: ({ height = 1700 }) => height,
         width: '90%',
         wordWrap: 'overflowWrap',
         textAlign: 'start',

@@ -22,23 +22,25 @@ const initialState = {
 
 export default function PesquisaModalContext({ children }) {
     const [context, setContext] = useState(initialState);
+    const [favorito, setFavorito] = useState([]);
+
     const modalRef = useRef(null);
     const modalFilmeRef = useRef(null);
-
-    //Adicionar localStorage
-    useEffect(() => {
-        localStorage.setItem('contexto', JSON.stringify(context));
-    }, [context]);
+    const favoritosRef = useRef(null);
 
     //Receber do localStorage
     useEffect(() => {
-        const dados = JSON.parse(localStorage.getItem('contexto'));
-        if (dados) setContext(dados);
-    }, []);
+        const dados = JSON.parse(localStorage.getItem('favoritos'));
+        if (dados) setFavorito(dados);
+    }, [setFavorito]);
+
+    //Adicionar localStorage
+    useEffect(() => {
+        localStorage.setItem('favoritos', JSON.stringify(favorito));
+    }, [favorito]);
 
     const handlePesquisaFilme = async (data) => {
         setLoading();
-        // console.log(data);
         const api = ENDPOINTS.FILME + data.pesquisa;
         buildQueryParams(api);
         await axios
@@ -53,11 +55,11 @@ export default function PesquisaModalContext({ children }) {
             .catch((error) => {
                 console.warn(error);
             });
+
         setLoading();
     };
 
     const handlePesquisaSeries = async (data) => {
-        // console.log(data);
         setLoading();
         const api = ENDPOINTS.SERIE + data.pesquisa;
         buildQueryParams(api);
@@ -78,13 +80,11 @@ export default function PesquisaModalContext({ children }) {
 
     const handlePesquisaPessoa = async (data) => {
         setLoading();
-        // console.log(data);
         const api = ENDPOINTS.PESSOA + data.pesquisa;
         buildQueryParams(api);
         await axios
             .get(api)
             .then((response) => {
-                // const apiDetalhes =
                 setContext((prevState) => ({
                     ...prevState,
                     lista: response.data.results,
@@ -138,15 +138,42 @@ export default function PesquisaModalContext({ children }) {
         }));
     }, [setContext]);
 
-    console.log('context', context);
+    const clickExcluir = useCallback(
+        (data) => {
+            const list = favorito.filter(
+                (movie) => movie.id !== Number(data.id)
+            );
+            setFavorito(list);
+            alert('O registro ' + data.name + ' foi removido');
+        },
+        [setFavorito, favorito]
+    );
+
+    const clickFavorito = useCallback(
+        (data) => {
+            const filtro = favorito.some(
+                (movie) => movie.id === Number(data.id)
+            );
+            if (filtro) {
+                alert('Já existe esse registro na sua lista de favoritos');
+            } else {
+                setFavorito((prevState) => [data, ...prevState]);
+            }
+        },
+        [setFavorito, favorito]
+    );
 
     return (
         <myContext.Provider
             value={{
                 context,
+                favorito,
                 detalharFilme,
+                clickExcluir,
+                clickFavorito,
                 modalRef,
                 modalFilmeRef,
+                favoritosRef,
                 handleCadastre,
                 handleEntrar,
                 handlePesquisaFilme,
@@ -167,18 +194,23 @@ export function useMyContext() {
         modalRef,
         modalFilmeRef,
         handleCadastre,
+        favoritosRef,
         handleEntrar,
         handlePesquisaSeries,
         handlePesquisaPessoa,
         handlePesquisaFilme,
         handlePesquisaPessoaCDetalhes,
         setLoading,
+        clickExcluir,
+        clickFavorito,
         context,
+        favorito,
     } = useContext(myContext);
     return {
         detalharFilme,
         modalRef,
         modalFilmeRef,
+        favoritosRef,
         handleCadastre,
         handleEntrar,
         handlePesquisaFilme,
@@ -186,6 +218,9 @@ export function useMyContext() {
         handlePesquisaPessoa,
         handlePesquisaPessoaCDetalhes,
         setLoading,
+        clickExcluir,
+        clickFavorito,
         context,
+        favorito,
     };
 }

@@ -18,7 +18,7 @@ const PessoaContent = ({ obj }) => {
                         component='p'
                         key={x.id}
                     >
-                        Filme: {x.title} <br />
+                        Filme: {x.title || x.name} <br />
                         Media de votos: {x.vote_average}
                     </Typography>
                 ))}

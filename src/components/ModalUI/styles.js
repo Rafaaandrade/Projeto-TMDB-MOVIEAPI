@@ -12,6 +12,12 @@ export const useStyles = makeStyles(() => ({
         alignItems: 'center',
         alignContent: 'center',
     },
+    modalButton: {
+        color: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+    },
 }));
 
 export default useStyles;

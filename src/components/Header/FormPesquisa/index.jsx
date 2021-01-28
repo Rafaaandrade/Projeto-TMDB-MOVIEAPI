@@ -21,6 +21,7 @@ const FormPesquisa = () => {
         handlePesquisaFilme,
         handlePesquisaSeries,
         handlePesquisaPessoa,
+        context,
     } = useMyContext();
 
     const methods = useForm({
@@ -32,21 +33,32 @@ const FormPesquisa = () => {
         setValue(ev.target.value);
     };
 
+    const clear = () => {
+        methods.setValue('pesquisa', '');
+        methods.setValue('escolhas', '');
+    };
+
     const { control, handleSubmit, errors } = methods;
 
     const handleEscolha = (data) => {
+        let escolha = null;
         switch (data.escolhas) {
             case 'filme':
-                return handlePesquisaFilme(data);
+                escolha = handlePesquisaFilme(data);
+                break;
 
             case 'serie':
-                return handlePesquisaSeries(data);
+                escolha = handlePesquisaSeries(data);
+                break;
 
             case 'pessoa':
-                return handlePesquisaPessoa(data);
+                escolha = handlePesquisaPessoa(data);
+                break;
 
             default:
         }
+        clear();
+        return escolha;
     };
 
     return (
@@ -71,6 +83,7 @@ const FormPesquisa = () => {
                                 value='filme'
                                 errors={errors}
                                 control={<Radio />}
+                                disabled={context.loading}
                             />
                             <FormControlLabel
                                 onChange={handleChange}
@@ -79,6 +92,7 @@ const FormPesquisa = () => {
                                 value='serie'
                                 errors={errors}
                                 control={<Radio />}
+                                disabled={context.loading}
                             />
                             <FormControlLabel
                                 onChange={handleChange}
@@ -87,11 +101,16 @@ const FormPesquisa = () => {
                                 errors={errors}
                                 control={<Radio />}
                                 value='pessoa'
+                                disabled={context.loading}
                             />
                         </FieldWrapper>
                     </FormControl>
                     <Controller as={Input} name='pesquisa' defaultValue='' />
-                    <IconButton type='submit' control={control}>
+                    <IconButton
+                        type='submit'
+                        control={control}
+                        disabled={context.loading}
+                    >
                         <SearchIcon className={styles.icnPesquisa} />
                     </IconButton>
                     <br />

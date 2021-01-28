@@ -1,6 +1,5 @@
-export const concatenar = (img, width = 350, height = 545) =>
-    // `https://image.tmdb.org/t/p/w${width}_and_h${height}_bestv2${img}`;
-    `https://image.tmdb.org/t/p/w500/${img}`;
+export const concatenar = (img) => `https://image.tmdb.org/t/p/w500/${img}`;
+
 export const isNotEmpty = (object) => {
     return object !== '' && object !== undefined && object !== null;
 };

@@ -5,6 +5,7 @@ import ModalFormulario from './../../components/Modal/FormLoginCadastro';
 import CardWrapper from './../../components/CardWraper';
 import ModalWrapper from './../../components/ModalWrapper/';
 import Loading from './../../components/Loading/index';
+import ModalFavoritos from '../../components/ModalFavoritos';
 
 const Home = () => {
     const { context } = useMyContext();
@@ -20,7 +21,7 @@ const Home = () => {
             ) : (
                 <CardWrapper lista={context.lista} resto={resto} />
             )}
-
+            <ModalFavoritos />
             <ModalWrapper />
         </>
     );

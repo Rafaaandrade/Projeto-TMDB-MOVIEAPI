@@ -11,12 +11,24 @@ import IMAGES from './../../utils/constants/images';
 
 const CardUI = ({ children, obj }) => {
     const styles = useStyles();
-    const { detalharFilme, modalFilmeRef } = useMyContext();
+    const {
+        detalharFilme,
+        modalFilmeRef,
+        clickExcluir,
+        clickFavorito,
+        favorito,
+    } = useMyContext();
 
     const clickSaibaMais = () => {
         console.log('clickSaibaMais', obj);
         modalFilmeRef.current && modalFilmeRef.current.show();
         detalharFilme(obj);
+    };
+
+    const bloquearFavorito = (obj) => {
+        const filtro = favorito.some((movie) => movie.id === Number(obj.id));
+        if (filtro) return true;
+        return false;
     };
 
     const checarImagem = useMemo(() => {
@@ -43,7 +55,19 @@ const CardUI = ({ children, obj }) => {
                     >
                         Saiba Mais
                     </Button>
-                    <Button size='small' color='primary'>
+                    <Button
+                        onClick={() => clickFavorito(obj)}
+                        size='small'
+                        color='primary'
+                        disabled={bloquearFavorito(obj)}
+                    >
+                        Favoritar
+                    </Button>
+                    <Button
+                        onClick={() => clickExcluir(obj)}
+                        size='small'
+                        color='primary'
+                    >
                         Excluir
                     </Button>
                 </CardActions>

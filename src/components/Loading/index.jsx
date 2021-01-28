@@ -8,7 +8,7 @@ const Loading = () => {
     return (
         <div className={styles.content}>
             <div className={styles.effect}>
-                <CircularProgress size={20} color='primary' />
+                <CircularProgress size={25} color='primary' />
             </div>
             <div>
                 <Typography variant='h5' color='primary'>
