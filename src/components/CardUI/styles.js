@@ -14,8 +14,8 @@ export const useStyles = makeStyles(() => ({
         width: '23%',
         height: '20%',
         marginBottom: '15px',
-        overFlow: 'hidden',
-        textOverflow: 'ellipsis',
+
+        boxShadow: 'inset 0 0 1em red, 0 0 1em blue',
     },
     cardImage: {
         height: 400,

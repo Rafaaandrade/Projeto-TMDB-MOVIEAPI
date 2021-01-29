@@ -1,15 +1,15 @@
+import axios from 'axios';
 import React, {
     createContext,
-    useState,
-    useContext,
-    useRef,
     useCallback,
+    useContext,
     useEffect,
+    useRef,
+    useState,
 } from 'react';
-import axios from 'axios';
-import { buildQueryParams } from './../../utils/functions/function-utils';
-import ENDPOINTS from './../../utils/endpoints/endpoints';
 import API from '../../utils/api/api';
+import ENDPOINTS from './../../utils/endpoints/endpoints';
+import { buildQueryParams } from './../../utils/functions/function-utils';
 
 const myContext = createContext();
 
@@ -61,6 +61,7 @@ export default function PesquisaModalContext({ children }) {
 
     const handlePesquisaSeries = async (data) => {
         setLoading();
+
         const api = ENDPOINTS.SERIE + data.pesquisa;
         buildQueryParams(api);
         await axios
@@ -80,6 +81,7 @@ export default function PesquisaModalContext({ children }) {
 
     const handlePesquisaPessoa = async (data) => {
         setLoading();
+
         const api = ENDPOINTS.PESSOA + data.pesquisa;
         buildQueryParams(api);
         await axios
@@ -99,7 +101,6 @@ export default function PesquisaModalContext({ children }) {
     };
 
     const handlePesquisaPessoaCDetalhes = async (data) => {
-        console.log(data);
         const api =
             'https://api.themoviedb.org/3/person/' +
             context.lista.id +
@@ -144,7 +145,8 @@ export default function PesquisaModalContext({ children }) {
                 (movie) => movie.id !== Number(data.id)
             );
             setFavorito(list);
-            alert('O registro ' + data.name + ' foi removido');
+            let name = data.name || data.title;
+            alert('O registro ' + name + ' foi removido');
         },
         [setFavorito, favorito]
     );

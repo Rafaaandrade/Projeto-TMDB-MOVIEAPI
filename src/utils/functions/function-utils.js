@@ -14,7 +14,7 @@ export const buildQueryParams = (api_url) => {
         .join('&');
 };
 
-export const chamarLoading = (t = 1000) =>
+export const chamarLoading = (t = 5000) =>
     new Promise((resolve) => {
         setTimeout(resolve, t);
     });

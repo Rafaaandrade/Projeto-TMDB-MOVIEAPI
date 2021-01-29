@@ -3,13 +3,13 @@ import Home from './pages/Home';
 import PesquisaModalContext from './components/Context/context';
 
 function App() {
-  return (
-    <div className='App'>
-      <PesquisaModalContext>
-        <Home />
-      </PesquisaModalContext>
-    </div>
-  );
+    return (
+        <div className='App'>
+            <PesquisaModalContext>
+                <Home />
+            </PesquisaModalContext>
+        </div>
+    );
 }
 
 export default App;

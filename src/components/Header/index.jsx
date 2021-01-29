@@ -23,48 +23,49 @@ const Header = () => {
 
     const mostrarFavoritos = useCallback(() => {
         favoritosRef.current && favoritosRef.current.show();
-        console.log('Botao favorito');
     }, [favoritosRef]);
 
     return (
-        <AppBar position='static'>
-            <Toolbar>
-                <div className={styles.divPesquisa}>
-                    <Typography
-                        variant='h6'
-                        color='inherit'
-                        className={styles.txtCabecalho}
-                    >
-                        Pesquise aqui por:
-                    </Typography>
-                    <FormPesquisa />
-                </div>
+        <>
+            <AppBar position='static'>
+                <Toolbar>
+                    <div className={styles.divPesquisa}>
+                        <Typography
+                            variant='h6'
+                            color='inherit'
+                            className={styles.txtCabecalho}
+                        >
+                            Pesquise aqui por:
+                        </Typography>
+                        <FormPesquisa />
+                    </div>
 
-                <div className={styles.divLoginHeader}>
-                    {context.isCadastro ? (
-                        ''
-                    ) : (
-                        <IconButton onClick={() => mostrarFavoritos()}>
-                            <AddIcon className={styles.icnAdicionar} />
-                        </IconButton>
-                    )}
+                    <div className={styles.divLoginHeader}>
+                        {context.isCadastro ? (
+                            ''
+                        ) : (
+                            <IconButton onClick={() => mostrarFavoritos()}>
+                                <AddIcon className={styles.icnAdicionar} />
+                            </IconButton>
+                        )}
 
-                    <Button
-                        className={styles.btnEntrar}
-                        onClick={() => handleEntrar()}
-                    >
-                        Entrar
-                    </Button>
+                        <Button
+                            className={styles.btnEntrar}
+                            onClick={() => handleEntrar()}
+                        >
+                            Entrar
+                        </Button>
 
-                    <Button
-                        className={styles.btnCadastre}
-                        onClick={() => handleCadastre()}
-                    >
-                        Cadastre-se
-                    </Button>
-                </div>
-            </Toolbar>
-        </AppBar>
+                        <Button
+                            className={styles.btnCadastre}
+                            onClick={() => handleCadastre()}
+                        >
+                            Cadastre-se
+                        </Button>
+                    </div>
+                </Toolbar>
+            </AppBar>
+        </>
     );
 };
 

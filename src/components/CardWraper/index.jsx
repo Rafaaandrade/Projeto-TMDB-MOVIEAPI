@@ -18,7 +18,7 @@ const CardWrapper = ({ lista = [], resto }) => {
                 </CardUI>
             ))}
             {Array.apply(null, { length: 3 - resto }).map((r, index) => (
-                <div className={styles.blankCard} key={index}></div>
+                <div key={index}></div>
             ))}
         </div>
     );

@@ -8,7 +8,7 @@ import Loading from './../../components/Loading/index';
 import ModalFavoritos from '../../components/ModalFavoritos';
 
 const Home = () => {
-    const { context } = useMyContext();
+    const { context, favorito } = useMyContext();
     const resto = context && context.length % 4;
     const isLoading = context.loading;
 
@@ -16,7 +16,7 @@ const Home = () => {
         <>
             <Header />
             <ModalFormulario />
-            <ModalFavoritos />
+            {favorito.length !== 0 && <ModalFavoritos />}
             {isLoading ? (
                 <Loading />
             ) : (

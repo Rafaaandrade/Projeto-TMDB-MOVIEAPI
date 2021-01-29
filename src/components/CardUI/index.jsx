@@ -20,7 +20,6 @@ const CardUI = ({ children, obj }) => {
     } = useMyContext();
 
     const clickSaibaMais = () => {
-        console.log('clickSaibaMais', obj);
         modalFilmeRef.current && modalFilmeRef.current.show();
         detalharFilme(obj);
     };
@@ -55,6 +54,7 @@ const CardUI = ({ children, obj }) => {
                     >
                         Saiba Mais
                     </Button>
+
                     <Button
                         onClick={() => clickFavorito(obj)}
                         size='small'
@@ -63,6 +63,7 @@ const CardUI = ({ children, obj }) => {
                     >
                         Favoritar
                     </Button>
+
                     <Button
                         onClick={() => clickExcluir(obj)}
                         size='small'
